@@ -1,0 +1,85 @@
+
+Runs an agent as client and server and is used just to verify configuration
+    sudo nomad agent -dev
+
+To get a status of the cluster
+    nomad node-status
+
+To find all the members of the gossip protocol
+  nomad server-members
+
+To generate a skeleton job (example.nomad)
+  nomad init
+
+To run a job
+  nomad run example.nomad
+
+To inspect status
+  nomad status example
+
+Using the Allocation ID using the command above, we can get the allocation 
+status and get even more information about a particular job.  The stats flag is
+optional and provides more information
+  nomad alloc-status [-stats] <allocation ID>
+
+Seeing the logs of a task
+  nodmad logs <allocation ID>
+
+To execute a dry-run of a job
+  nomad plan example.nomad
+
+To verify that the job has not been modified since it was started, grab the 
+"Job Modify Index" from the command above and run:
+  nomad run -check-index <index number> example.nomad
+
+To stop a job
+  nomad stop example
+
+To get status of a job
+  nomad status example
+
+To start an agent as a server:
+  nomad agent -config server.hcl
+where the server.hcl contains:
+
+      # Increase log verbosity
+      log_level = "DEBUG"
+
+      # Setup data dir
+      data_dir = "/tmp/server1"
+
+      # Enable the server
+      server {
+          enabled = true
+
+          # Self-elect, should be 3 or 5 for production
+          bootstrap_expect = 1
+      }
+
+To start an agent as a client:
+  nomad agent -config client.hcl
+where the client.hcl contains:
+
+      # Increase log verbosity
+      log_level = "DEBUG"
+
+      # Setup data dir
+      data_dir = "/tmp/client"
+
+      # Enable the client
+      client {
+          enabled = true
+
+          # For demo assume we are talking to server1. For production,
+          # this should be like "nomad.service.consul:4647" and a system
+          # like Consul used for service discovery.
+          servers = ["127.0.0.1:4647"]
+      }
+
+      # Modify our port to avoid a collision with server1
+      ports {
+          http = 5656
+      }
+
+
+
