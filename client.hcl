@@ -1,14 +1,14 @@
 # Increase log verbosity
 log_level = "DEBUG"
 
-bind_addr = "10.215.34.53"
+#bind_addr = "10.215.34.53"
 
 
 # Setup data dir
 data_dir = "/tmp/client1"
 
 # Give the agent a unique name. Defaults to hostname
-name = "client1"
+#name = "client1"
 
 # Enable the client
 client {

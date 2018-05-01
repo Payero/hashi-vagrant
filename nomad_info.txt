@@ -83,3 +83,333 @@ where the client.hcl contains:
 
 
 
+TO OPEN THE UI http://<server>:4646/ui
+
+Getting all the nodes on a server:
+  curl http://<SERVER>:4646/v1/nodes
+
+Sample Output
+
+[
+  {
+    "Address": "10.215.34.47",
+    "CreateIndex": 17,
+    "Datacenter": "dc1",
+    "Drain": false,
+    "ID": "199f295c-c75e-2569-48cf-47998ed7da80",
+    "ModifyIndex": 22,
+    "Name": "client-2",
+    "NodeClass": "",
+    "SchedulingEligibility": "eligible",
+    "Status": "ready",
+    "StatusDescription": "",
+    "Version": "0.8.2"
+  },
+  {
+    "Address": "10.215.34.16",
+    "CreateIndex": 8,
+    "Datacenter": "dc1",
+    "Drain": false,
+    "ID": "312fef00-1465-b526-e80c-1d761698d4cb",
+    "ModifyIndex": 21,
+    "Name": "client-1",
+    "NodeClass": "",
+    "SchedulingEligibility": "eligible",
+    "Status": "ready",
+    "StatusDescription": "",
+    "Version": "0.8.2"
+  }
+]
+
+Getting details of a particular Client
+  http://<SERVER>:4646/v1/node/<CLIENT ID>
+
+Sample Output.  I think we would want primarily the resources
+
+{
+  "Attributes": {
+    "cpu.totalcompute": "3504",
+    "driver.docker.bridge_ip": "172.17.0.1",
+    "memory.totalbytes": "1040482304",
+    "nomad.revision": "4f641c00a3eed9d20c34a45c9d9681c0dcd20c9e",
+    "unique.network.ip-address": "10.215.34.16",
+    "cpu.arch": "amd64",
+    "os.signals": "SIGABRT,SIGINT,SIGIOT,SIGTTIN,SIGTSTP,SIGXCPU,SIGALRM,SIGBUS,SIGCONT,SIGSEGV,SIGSYS,SIGTRAP,SIGFPE,SIGURG,SIGUSR1,SIGWINCH,SIGXFSZ,SIGKILL,SIGPROF,SIGSTOP,SIGTERM,SIGTTOU,SIGCHLD,SIGHUP,SIGILL,SIGIO,SIGPIPE,SIGQUIT,SIGUSR2",
+    "unique.cgroup.mountpoint": "/sys/fs/cgroup",
+    "consul.server": "true",
+    "driver.docker.volumes.enabled": "1",
+    "unique.consul.name": "client-1",
+    "cpu.frequency": "3504",
+    "consul.revision": "fb848fc48",
+    "kernel.version": "4.4.0-87-generic",
+    "driver.exec": "1",
+    "os.name": "ubuntu",
+    "unique.storage.bytestotal": "65940574208",
+    "cpu.modelname": "Intel(R) Core(TM) i5-7600 CPU @ 3.50GHz",
+    "driver.docker.version": "18.03.1-ce",
+    "unique.storage.bytesfree": "60749602816",
+    "driver.java": "1",
+    "driver.docker": "1",
+    "consul.version": "1.0.7",
+    "consul.datacenter": "dc1",
+    "os.version": "16.04",
+    "kernel.name": "linux",
+    "nomad.version": "0.8.2",
+    "unique.hostname": "client-1",
+    "unique.storage.volume": "/dev/mapper/vagrant--vg-root",
+    "cpu.numcores": "1"
+  },
+  "ComputedClass": "v1:14300610932265791461",
+  "CreateIndex": 8,
+  "Datacenter": "dc1",
+  "Drain": false,
+  "DrainStrategy": null,
+  "Drivers": {
+    "raw_exec": {
+      "Attributes": null,
+      "Detected": false,
+      "HealthDescription": "Driver raw_exec is not detected",
+      "Healthy": false,
+      "UpdateTime": "2018-04-30T18:16:00.198051424Z"
+    },
+    "java": {
+      "Attributes": null,
+      "Detected": true,
+      "HealthDescription": "Driver java is detected",
+      "Healthy": true,
+      "UpdateTime": "2018-04-30T18:16:00.198078115Z"
+    },
+    "qemu": {
+      "Attributes": null,
+      "Detected": false,
+      "HealthDescription": "Driver qemu is not detected",
+      "Healthy": false,
+      "UpdateTime": "2018-04-30T18:16:00.198152117Z"
+    },
+    "rkt": {
+      "Attributes": null,
+      "Detected": false,
+      "HealthDescription": "Driver rkt is not detected",
+      "Healthy": false,
+      "UpdateTime": "2018-04-30T18:17:00.199197687Z"
+    },
+    "docker": {
+      "Attributes": {
+        "driver.docker.volumes.enabled": "1",
+        "driver.docker.bridge_ip": "172.17.0.1",
+        "driver.docker.version": "18.03.1-ce"
+      },
+      "Detected": true,
+      "HealthDescription": "Driver is available and responsive",
+      "Healthy": true,
+      "UpdateTime": "2018-04-30T18:17:00.203046532Z"
+    },
+    "exec": {
+      "Attributes": null,
+      "Detected": true,
+      "HealthDescription": "Driver exec is detected",
+      "Healthy": true,
+      "UpdateTime": "2018-04-30T18:17:00.201935806Z"
+    }
+  },
+  "Events": [
+    {
+      "CreateIndex": 0,
+      "Details": null,
+      "Message": "Node Registered",
+      "Subsystem": "Cluster",
+      "Timestamp": "2018-04-30T18:12:54Z"
+    }
+  ],
+  "HTTPAddr": "10.215.34.16:4646",
+  "ID": "312fef00-1465-b526-e80c-1d761698d4cb",
+  "Links": {
+    "consul": "dc1.client-1"
+  },
+  "Meta": null,
+  "ModifyIndex": 21,
+  "Name": "client-1",
+  "NodeClass": "",
+  "Reserved": {
+    "CPU": 0,
+    "DiskMB": 0,
+    "IOPS": 0,
+    "MemoryMB": 0,
+    "Networks": null
+  },
+  "Resources": {
+    "CPU": 3504,
+    "DiskMB": 57935,
+    "IOPS": 0,
+    "MemoryMB": 992,
+    "Networks": [
+      {
+        "CIDR": "10.215.34.16/32",
+        "Device": "eth1",
+        "DynamicPorts": null,
+        "IP": "10.215.34.16",
+        "MBits": 1000,
+        "ReservedPorts": null
+      }
+    ]
+  },
+  "SchedulingEligibility": "eligible",
+  "SecretID": "",
+  "Status": "ready",
+  "StatusDescription": "",
+  "StatusUpdatedAt": 1525165217,
+  "TLSEnabled": false
+}
+
+
+***********************************************************************
+                               CONSUL
+***********************************************************************
+
+Consul can start services by using configuration files.  For instance, to run
+a service called web we would do the following:
+
+sudo mkdir /etc/consul.d
+echo '{"service": {"name": "web", "tags": ["rails"], "port": 80}}' \
+    | sudo tee /etc/consul.d/web.json
+
+Then if we want to query Consul to get status of the service:
+curl http://localhost:8500/v1/catalog/service/web
+
+Sample Output:
+
+[
+    {
+        "ID": "70c5fd2c-93c0-2baf-debd-5d64a341e1cd",
+        "Node": "server",
+        "Address": "127.0.0.1",
+        "Datacenter": "dc1",
+        "TaggedAddresses": {
+            "lan": "127.0.0.1",
+            "wan": "127.0.0.1"
+        },
+        "NodeMeta": {
+            "consul-network-segment": ""
+        },
+        "ServiceID": "web",
+        "ServiceName": "web",
+        "ServiceTags": [
+            "rails"
+        ],
+        "ServiceAddress": "",
+        "ServiceMeta": {},
+        "ServicePort": 80,
+        "ServiceEnableTagOverride": false,
+        "CreateIndex": 6,
+        "ModifyIndex": 6
+    }
+]
+
+
+Besides HTTP, we could use DNS:
+
+dig @127.0.0.1 -p 8600 web.service.consul
+
+Sample Output 
+
+; <<>> DiG 9.10.3-P4-Ubuntu <<>> @127.0.0.1 -p 8600 web.service.consul
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 16692
+;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;web.service.consul.    IN  A
+
+;; ANSWER SECTION:
+web.service.consul. 0 IN  A 127.0.0.1
+
+;; Query time: 1 msec
+;; SERVER: 127.0.0.1#8600(127.0.0.1)
+;; WHEN: Tue May 01 10:06:51 UTC 2018
+;; MSG SIZE  rcvd: 63
+
+
+Consul Cluster
+
+To Start the Server:
+consul agent -server -bootstrap-expect=1  -data-dir=/tmp/consul -node=server -enable-script-checks=true -config-dir=/etc/consul.d -bind=10.215.34.2
+
+To Start an Agent
+consul agent -data-dir=/tmp/consul -node=client-1 -enable-script-checks=true -config-dir=/etc/consul.d -bind=10.215.34.16
+
+
+Once the Agent is up and running it needs to join the cluster by sending a 
+request to the server
+
+consul join "server" (10.215.34.2)
+
+Remember: To join a cluster, a Consul agent only needs to learn about one existing member. After joining the cluster, the agents gossip with each other to propagate full membership information.
+
+
+To make the agent join at startup add the -retry-join <node> flag as in:
+consul agent -data-dir=/tmp/consul -node=client-1 -enable-script-checks=true -config-dir=/etc/consul.d -bind=10.215.34.16 -retry-join 10.215.34.2
+
+
+Consul Checks
+
+Similar to a service, a check can be registered either by providing a check definition or by making the appropriate calls to the HTTP API.
+
+The following is an example of a check
+
+echo '{"check": {"name": "ping",
+  "args": ["ping", "-c1", "google.com"], "interval": "30s"}}' \
+  >/etc/consul.d/ping.json
+
+The following command adds a service with a check
+echo '{"service": {"name": "web", "tags": ["rails"], "port": 80,
+  "check": {"args": ["curl", "localhost"], "interval": "10s"}}}' \
+  >/etc/consul.d/web.json
+
+The check will run every 10 second
+
+
+To check the health status of the services:
+
+Returns all the services in critical state
+  curl http://localhost:8500/v1/health/state/critical
+
+Sample Output:
+[
+  {
+    "Node": "client-1",
+    "CheckID": "service:web",
+    "Name": "Service 'web' check",
+    "Status": "critical",
+    "Notes": "",
+    "Output": "",
+    "ServiceID": "web",
+    "ServiceName": "web",
+    "ServiceTags": [
+      "rails"
+    ],
+    "Definition": {},
+    "CreateIndex": 219,
+    "ModifyIndex": 219
+  },
+  {
+    "Node": "client-2",
+    "CheckID": "service:web",
+    "Name": "Service 'web' check",
+    "Status": "critical",
+    "Notes": "",
+    "Output": "",
+    "ServiceID": "web",
+    "ServiceName": "web",
+    "ServiceTags": [
+      "rails"
+    ],
+    "Definition": {},
+    "CreateIndex": 228,
+    "ModifyIndex": 228
+  }
+]

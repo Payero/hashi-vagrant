@@ -5,7 +5,7 @@ log_level = "DEBUG"
 data_dir = "/tmp/server1"
 
 # OEG Additions
-bind_addr = "10.215.34.16"
+bind_addr = "10.215.34.2"
 
 
 

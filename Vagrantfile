@@ -126,27 +126,27 @@ Vagrant.configure(2) do |config|
 
   end # end of cl1
 
-# # Starting Client 2
-#   config.vm.define "cl2" do |cl2|
-#     cl2.vm.box = "bento/ubuntu-16.04" # 16.04 LTS
-#     cl2.vm.hostname = "client-2"
-#     cl2.vm.provision "shell", inline: $script, privileged: false
-#     cl2.vm.provision "docker" # Just install it
+# Starting Client 2
+  config.vm.define "cl2" do |cl2|
+    cl2.vm.box = "bento/ubuntu-16.04" # 16.04 LTS
+    cl2.vm.hostname = "client-2"
+    cl2.vm.provision "shell", inline: $script, privileged: false
+    cl2.vm.provision "docker" # Just install it
     
-#     cl2.vm.network "public_network", type: "dhcp", bridge: "enp0s31f6"
+    cl2.vm.network "public_network", type: "dhcp", bridge: "enp0s31f6"
 
-#     # Expose the nomad api and ui to the host
-#     cl2.vm.network "forwarded_port", guest: 4646, host: 4648, auto_correct: true
+    # Expose the nomad api and ui to the host
+    cl2.vm.network "forwarded_port", guest: 4646, host: 4648, auto_correct: true
 
 
-#     # Increase memory for Virtualbox
-#     cl2.vm.provider "virtualbox" do |vb|
-#       vb.memory = "1024"
-#     end
+    # Increase memory for Virtualbox
+    cl2.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
 
-#     cl2.vm.provision "shell", path: "./print_ip.sh", privileged: false
+    cl2.vm.provision "shell", path: "./print_ip.sh", privileged: false
 
-#   end # end of cl2
+   end # end of cl2
 
 # # Starting Client 3
 #   config.vm.define "cl3" do |cl3|
